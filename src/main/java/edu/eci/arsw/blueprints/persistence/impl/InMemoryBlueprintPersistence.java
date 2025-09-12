@@ -22,12 +22,22 @@ import java.util.Set;
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
 
     private final Map<Tuple<String,String>,Blueprint> blueprints=new HashMap<>();
+    
 
     public InMemoryBlueprintPersistence() {
         //load stub data
         Point[] pts=new Point[]{new Point(140, 140),new Point(115, 115)};
+        Point[] firstPts=new Point[]{new Point(140, 140),new Point(115, 115)};
+        Point[] secondPts=new Point[]{new Point(200, 300),new Point(400, 100)};
+        Point[] thirdPts=new Point[]{new Point(200, 5),new Point(128, 86)};
+        Blueprint firtsBp=new Blueprint("juan", "bp1 ",firstPts);
+        Blueprint secondBp=new Blueprint("santiago", "bp2 ",secondPts);
+        Blueprint thirdBp=new Blueprint("santiago", "bp3",thirdPts);
         Blueprint bp=new Blueprint("_authorname_", "_bpname_ ",pts);
         blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
+        blueprints.put(new Tuple<>(firtsBp.getAuthor(),firtsBp.getName()), firtsBp);
+        blueprints.put(new Tuple<>(secondBp.getAuthor(),secondBp.getName()), secondBp);
+        blueprints.put(new Tuple<>(thirdBp.getAuthor(),thirdBp.getName()), thirdBp);
     }    
     
     @Override
