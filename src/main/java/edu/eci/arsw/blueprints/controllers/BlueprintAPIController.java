@@ -5,9 +5,20 @@
  */
 package edu.eci.arsw.blueprints.controllers;
 
+import edu.eci.arsw.blueprints.filter.Filter;
+import edu.eci.arsw.blueprints.model.Blueprint;
+import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
+import edu.eci.arsw.blueprints.services.BlueprintsServices;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +28,71 @@ import org.springframework.web.bind.annotation.RestController;
  * @author hcadavid
  */
 public class BlueprintAPIController {
+    
+    @Autowired
+    private final BlueprintsServices bps;
+    @Autowired
+    private final Filter filter;
+    
+    /**
+     * Constructor de BluePrintController.
+     * @param bps Servicio de blueprints inyectado.
+     * @param filter
+     */
+    public BlueprintAPIController(BlueprintsServices bps, Filter filter) {
+        this.bps = bps;
+        this.filter = filter;
+    }
+    
+    @PostMapping("/")
+    public ResponseEntity<?> createBlueprint(@RequestBody Blueprint bp){
+        HashMap<String, Object> response = new HashMap<>();
+        try {
+            bps.addNewBlueprint(bp);
+            response.put("status", "success");
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            response.put("error", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+    
+    @GetMapping("/")
+    public ResponseEntity<?> getBlueprints(){
+        try {
+            Set<Blueprint> blueprints = filter.filterByPrints(bps.getAllBlueprints());
+            return ResponseEntity.ok(blueprints);
+        } catch (BlueprintNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There are no blueprints");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+        }
+    }
+    
+    @GetMapping("/{author}")
+    public ResponseEntity<?> getBlueprintsByAuthor(@PathVariable("author") String author){
+        try {
+            Set<Blueprint> blueprints = filter.filterByPrints(bps.getBlueprintsByAuthor(author));
+            return ResponseEntity.ok(blueprints);
+        } catch (BlueprintNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprints not found for author: " + author);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+        }
+    }
+    
+    @GetMapping("/{author}/{name}")
+    public ResponseEntity<?> getBlueprintsByAuthorAndName(@PathVariable("author") String author, 
+            @PathVariable("name") String name){
+        try {
+            Blueprint bp = filter.filterByMethod(bps.getBlueprint(author, name));
+            return ResponseEntity.ok(bp);
+        } catch (BlueprintNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Blueprints not found for author: " + author);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
+        }
+    }
     
     
     
