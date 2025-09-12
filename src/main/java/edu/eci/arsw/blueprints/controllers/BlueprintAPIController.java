@@ -8,21 +8,23 @@ package edu.eci.arsw.blueprints.controllers;
 import edu.eci.arsw.blueprints.filter.Filter;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
+import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
 import edu.eci.arsw.blueprints.services.BlueprintsServices;
-import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+@RestController
+@RequestMapping("/blueprints")
 /**
  *
  * @author hcadavid
@@ -44,16 +46,17 @@ public class BlueprintAPIController {
         this.filter = filter;
     }
     
-    @PostMapping("/")
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createBlueprint(@RequestBody Blueprint bp){
-        HashMap<String, Object> response = new HashMap<>();
         try {
             bps.addNewBlueprint(bp);
-            response.put("status", "success");
-            return ResponseEntity.status(HttpStatus.OK).body(response);
-        } catch (Exception e) {
-            response.put("error", e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (BlueprintPersistenceException e1) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e1);
+            return new ResponseEntity<>("Error, Can't create new blueprint",HttpStatus.FORBIDDEN);   
+        } catch (Exception e2) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e2);
+            return new ResponseEntity<>("Unknown error",HttpStatus.FORBIDDEN);  
         }
     }
     
@@ -93,10 +96,5 @@ public class BlueprintAPIController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred.");
         }
     }
-    
-    
-    
-    
-    
 }
 
