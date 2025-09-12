@@ -29,22 +29,15 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author hcadavid
  */
-@RestController
-@RequestMapping("/blueprints")
 public class BlueprintAPIController {
     
-    @Autowired
     private BlueprintsServices bps;
     
+    public BlueprintAPIController(BlueprintsServices bps){
+        this.bps = bps;
+    }
     
-    /**
-     * Constructor de BluePrintController.
-     * @param bps Servicio de blueprints inyectado.
-     * @param filter
-     */
-
-    
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/",method = RequestMethod.POST)
     public ResponseEntity<?> createBlueprint(@RequestBody Blueprint bp){
         try {
             bps.addNewBlueprint(bp);
@@ -89,6 +82,22 @@ public class BlueprintAPIController {
         } catch (Exception e) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e);
             return new ResponseEntity<>("Can not get the Blueprints for that author",HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    @RequestMapping(value = "/{author}/{name}",method = RequestMethod.PUT)
+    public ResponseEntity<?> updateBlueprint(@PathVariable("author") String author, 
+            @PathVariable("name") String name, @RequestBody Blueprint bp){
+        
+        try {
+            bps.updateBlueprintsByAuthorAndName(author, name, bp);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (BlueprintNotFoundException e1) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e1);
+            return new ResponseEntity<>("Error, Can't create new blueprint",HttpStatus.FORBIDDEN);   
+        } catch (Exception e2) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e2);
+            return new ResponseEntity<>("Unknown error",HttpStatus.FORBIDDEN);  
         }
     }
 }
