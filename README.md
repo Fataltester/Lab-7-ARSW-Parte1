@@ -1,24 +1,10 @@
 ### Escuela Colombiana de Ingeniería
+### Arquitecturas de Software - ARSW 2025-2
+### SpringBoot_REST_API_Blueprints_Part2
 
-### Arquitecturas de Software
-
-
-
-#### API REST para la gestión de planos.
-
-En este ejercicio se va a construír el componente BlueprintsRESTAPI, el cual permita gestionar los planos arquitectónicos de una prestigiosa compañia de diseño. La idea de este API es ofrecer un medio estandarizado e 'independiente de la plataforma' para que las herramientas que se desarrollen a futuro para la compañía puedan gestionar los planos de forma centralizada.
-El siguiente, es el diagrama de componentes que corresponde a las decisiones arquitectónicas planteadas al inicio del proyecto:
-
-![](img/CompDiag.png)
-
-Donde se definió que:
-
-* El componente BlueprintsRESTAPI debe resolver los servicios de su interfaz a través de un componente de servicios, el cual -a su vez- estará asociado con un componente que provea el esquema de persistencia. Es decir, se quiere un bajo acoplamiento entre el API, la implementación de los servicios, y el esquema de persistencia usado por los mismos.
-
-Del anterior diagrama de componentes (de alto nivel), se desprendió el siguiente diseño detallado, cuando se decidió que el API estará implementado usando el esquema de inyección de dependencias de Spring (el cual requiere aplicar el principio de Inversión de Dependencias), la extensión SpringMVC para definir los servicios REST, y SpringBoot para la configurar la aplicación:
-
-
-![](img/ClassDiagram.png)
+## Integrantes:
+### Juan David Martínez Mendez
+### Santiago Gualdrón Rincón
 
 ### Parte I
 
@@ -84,6 +70,7 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 	}
 	```	
 
+<img width="1034" height="292" alt="image" src="https://github.com/user-attachments/assets/9ca75d68-c4b7-4995-97a1-f89c6546d996" />
 
 2.  Para probar que el recurso ‘planos’ acepta e interpreta
     correctamente las peticiones POST, use el comando curl de Unix. Este
@@ -93,19 +80,34 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
     Cliente (donde en lugar de {ObjetoJSON}, se usará un objeto jSON correspondiente a una nueva orden:
 
 	```	
-	$ curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://URL_del_recurso_ordenes -d '{ObjetoJSON}'
-	```	
+	$ curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints/ -d '{"author": "sergio","points": [{"x": 98,"y": 200},{"x": 150,"y": 170 } ], "name": "bp5"}'
+	```
 
 	Con lo anterior, registre un nuevo plano (para 'diseñar' un objeto jSON, puede usar [esta herramienta](http://www.jsoneditoronline.org/)):
 	
+ 	<img width="724" height="103" alt="image" src="https://github.com/user-attachments/assets/34e3afdb-28fe-41a4-99c7-2dea1ff1cb69" />
 
 	Nota: puede basarse en el formato jSON mostrado en el navegador al consultar una orden con el método GET.
+	
+ 	<img width="725" height="220" alt="image" src="https://github.com/user-attachments/assets/54589254-4293-40d6-b48a-2d95077f0745" />
+
+	(NOTA: el ultimo formato JSON, es el dado en el POST anterior)
+	Mostrandolo en la plataforma de POSTMAN:
+
+	<img width="1367" height="859" alt="image" src="https://github.com/user-attachments/assets/dd0c836a-8c07-4e8a-baaa-c3b67630e0dc" />
 
 
-3. Teniendo en cuenta el autor y numbre del plano registrado, verifique que el mismo se pueda obtener mediante una petición GET al recurso '/blueprints/{author}/{bpname}' correspondiente.
+4. Teniendo en cuenta el autor y numbre del plano registrado, verifique que el mismo se pueda obtener mediante una petición GET al recurso '/blueprints/{author}/{bpname}' correspondiente.
 
-4. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
+	<img width="1367" height="521" alt="image" src="https://github.com/user-attachments/assets/67631151-4b72-4cab-97f3-4c64be1144c3" />
 
+5. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
+
+	<img width="1105" height="341" alt="image" src="https://github.com/user-attachments/assets/24ce762e-8fc6-4c79-b6b8-b1f9ce5fadc6" />
+
+	<img width="1367" height="644" alt="image" src="https://github.com/user-attachments/assets/dfe9425b-86b0-45da-925a-14d330addbea" />
+
+	<img width="1360" height="519" alt="image" src="https://github.com/user-attachments/assets/77a43d8c-9290-4555-a68d-a1e695986493" />
 
 ### Parte III
 
@@ -117,6 +119,10 @@ El componente BlueprintsRESTAPI funcionará en un entorno concurrente. Es decir,
 Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que simplemente sincronizar el acceso a las operaciones de persistencia/consulta DEGRADARÁ SIGNIFICATIVAMENTE el desempeño de API, por lo cual se deben buscar estrategias alternativas.
 
 Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt
+
+1. <img width="995" height="44" alt="image" src="https://github.com/user-attachments/assets/fe9539fb-c148-44b9-8d85-9f0dcc1189c5" />
+
+2. <img width="1010" height="162" alt="image" src="https://github.com/user-attachments/assets/b52e0125-d278-4e79-ade9-76ab50a60244" />
 
 #### Criterios de evaluación
 
