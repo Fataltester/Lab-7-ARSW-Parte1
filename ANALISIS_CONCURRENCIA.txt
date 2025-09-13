@@ -1,0 +1,16 @@
+PARTE III
+
+PREGUNTAS
+
+1. Qué condiciones de carrera se podrían presentar?
+2. Cuales son las respectivas regiones críticas?
+
+SOLUCIONES
+
+Con respecto a las soluciones dadas, en el README se encuentran imágenes de las implementaciones dadas:
+
+1. ConcurrentHashMap: maneja el ingreso, salida y eliminación de datos en el hashmap, con la concurrencia adecuada y sin los bloqueos.
+
+2. PutIfAbsent: ayuda al ingreso de datos, para que sea atómico; evitando la sobreescritura de otros procesos al mismo tiempo.
+
+3. Se agregaron previamente condicionales en el Update, para que solo actualice si ya existe en el hashmap los datos, en cuyo caso no, evita una búsqueda innecesaria.
