@@ -80,20 +80,34 @@
     Cliente (donde en lugar de {ObjetoJSON}, se usará un objeto jSON correspondiente a una nueva orden:
 
 	```	
-	$ curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://URL_del_recurso_ordenes -d '{ObjetoJSON}'
-	```	
+	$ curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints/ -d '{"author": "sergio","points": [{"x": 98,"y": 200},{"x": 150,"y": 170 } ], "name": "bp5"}'
+	```
 
 	Con lo anterior, registre un nuevo plano (para 'diseñar' un objeto jSON, puede usar [esta herramienta](http://www.jsoneditoronline.org/)):
 	
+ 	<img width="724" height="103" alt="image" src="https://github.com/user-attachments/assets/34e3afdb-28fe-41a4-99c7-2dea1ff1cb69" />
 
 	Nota: puede basarse en el formato jSON mostrado en el navegador al consultar una orden con el método GET.
+	
+ 	<img width="725" height="220" alt="image" src="https://github.com/user-attachments/assets/54589254-4293-40d6-b48a-2d95077f0745" />
+
+	(NOTA: el ultimo formato JSON, es el dado en el POST anterior)
+	Mostrandolo en la plataforma de POSTMAN:
+
+	<img width="1367" height="859" alt="image" src="https://github.com/user-attachments/assets/dd0c836a-8c07-4e8a-baaa-c3b67630e0dc" />
 
 
-3. Teniendo en cuenta el autor y numbre del plano registrado, verifique que el mismo se pueda obtener mediante una petición GET al recurso '/blueprints/{author}/{bpname}' correspondiente.
+4. Teniendo en cuenta el autor y numbre del plano registrado, verifique que el mismo se pueda obtener mediante una petición GET al recurso '/blueprints/{author}/{bpname}' correspondiente.
 
-4. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
+	<img width="1367" height="521" alt="image" src="https://github.com/user-attachments/assets/67631151-4b72-4cab-97f3-4c64be1144c3" />
 
-<img width="1105" height="341" alt="image" src="https://github.com/user-attachments/assets/24ce762e-8fc6-4c79-b6b8-b1f9ce5fadc6" />
+5. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
+
+	<img width="1105" height="341" alt="image" src="https://github.com/user-attachments/assets/24ce762e-8fc6-4c79-b6b8-b1f9ce5fadc6" />
+
+	<img width="1367" height="644" alt="image" src="https://github.com/user-attachments/assets/dfe9425b-86b0-45da-925a-14d330addbea" />
+
+	<img width="1360" height="519" alt="image" src="https://github.com/user-attachments/assets/77a43d8c-9290-4555-a68d-a1e695986493" />
 
 ### Parte III
 
