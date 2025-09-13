@@ -1,24 +1,10 @@
 ### Escuela Colombiana de Ingeniería
+### Arquitecturas de Software - ARSW 2025-2
+### SpringBoot_REST_API_Blueprints_Part2
 
-### Arquitecturas de Software
-
-
-
-#### API REST para la gestión de planos.
-
-En este ejercicio se va a construír el componente BlueprintsRESTAPI, el cual permita gestionar los planos arquitectónicos de una prestigiosa compañia de diseño. La idea de este API es ofrecer un medio estandarizado e 'independiente de la plataforma' para que las herramientas que se desarrollen a futuro para la compañía puedan gestionar los planos de forma centralizada.
-El siguiente, es el diagrama de componentes que corresponde a las decisiones arquitectónicas planteadas al inicio del proyecto:
-
-![](img/CompDiag.png)
-
-Donde se definió que:
-
-* El componente BlueprintsRESTAPI debe resolver los servicios de su interfaz a través de un componente de servicios, el cual -a su vez- estará asociado con un componente que provea el esquema de persistencia. Es decir, se quiere un bajo acoplamiento entre el API, la implementación de los servicios, y el esquema de persistencia usado por los mismos.
-
-Del anterior diagrama de componentes (de alto nivel), se desprendió el siguiente diseño detallado, cuando se decidió que el API estará implementado usando el esquema de inyección de dependencias de Spring (el cual requiere aplicar el principio de Inversión de Dependencias), la extensión SpringMVC para definir los servicios REST, y SpringBoot para la configurar la aplicación:
-
-
-![](img/ClassDiagram.png)
+## Integrantes:
+### Juan David Martínez Mendez
+### Santiago Gualdrón Rincón
 
 ### Parte I
 
@@ -84,6 +70,7 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 	}
 	```	
 
+<img width="1034" height="292" alt="image" src="https://github.com/user-attachments/assets/9ca75d68-c4b7-4995-97a1-f89c6546d996" />
 
 2.  Para probar que el recurso ‘planos’ acepta e interpreta
     correctamente las peticiones POST, use el comando curl de Unix. Este
@@ -106,6 +93,7 @@ Del anterior diagrama de componentes (de alto nivel), se desprendió el siguient
 
 4. Agregue soporte al verbo PUT para los recursos de la forma '/blueprints/{author}/{bpname}', de manera que sea posible actualizar un plano determinado.
 
+<img width="1105" height="341" alt="image" src="https://github.com/user-attachments/assets/24ce762e-8fc6-4c79-b6b8-b1f9ce5fadc6" />
 
 ### Parte III
 
@@ -117,6 +105,10 @@ El componente BlueprintsRESTAPI funcionará en un entorno concurrente. Es decir,
 Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que simplemente sincronizar el acceso a las operaciones de persistencia/consulta DEGRADARÁ SIGNIFICATIVAMENTE el desempeño de API, por lo cual se deben buscar estrategias alternativas.
 
 Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt
+
+1. <img width="995" height="44" alt="image" src="https://github.com/user-attachments/assets/fe9539fb-c148-44b9-8d85-9f0dcc1189c5" />
+
+2. <img width="1010" height="162" alt="image" src="https://github.com/user-attachments/assets/b52e0125-d278-4e79-ade9-76ab50a60244" />
 
 #### Criterios de evaluación
 
