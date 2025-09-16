@@ -3,8 +3,12 @@ PARTE III
 PREGUNTAS
 
 1. Qué condiciones de carrera se podrían presentar?
+A nivel de persistencia, si dos hilos tratan de guardar un blueprint con la misma llave
+pueden causar inconsistencias.
+Mientras que un hilo lee y otro modifica, el que lee puede recibir inconsistencias o nulos.
 2. Cuales son las respectivas regiones críticas?
-
+Las regiones críticas serían el Map que utilizamos si se le realizan metodos de inserción y lectura
+Tambien los objetos blueprint porque se pueden llegar a compartir entre hilos
 SOLUCIONES
 
 Con respecto a las soluciones dadas, en el README se encuentran imágenes de las implementaciones dadas:
