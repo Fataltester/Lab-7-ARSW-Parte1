@@ -123,21 +123,9 @@ El componente BlueprintsRESTAPI funcionará en un entorno concurrente. Es decir,
 
 Ajuste el código para suprimir las condiciones de carrera. Tengan en cuenta que simplemente sincronizar el acceso a las operaciones de persistencia/consulta DEGRADARÁ SIGNIFICATIVAMENTE el desempeño de API, por lo cual se deben buscar estrategias alternativas.
 
-Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt
+Escriba su análisis y la solución aplicada en el archivo ANALISIS_CONCURRENCIA.txt, cabe aclarar que las preguntas y justificación de la solución están planteadas en el .txt.
 
 1. <img width="995" height="44" alt="image" src="https://github.com/user-attachments/assets/fe9539fb-c148-44b9-8d85-9f0dcc1189c5" />
 
 2. <img width="1010" height="162" alt="image" src="https://github.com/user-attachments/assets/b52e0125-d278-4e79-ade9-76ab50a60244" />
 
-#### Criterios de evaluación
-
-1. Diseño.
-	* Al controlador REST implementado se le inyectan los servicios implementados en el laboratorio anterior.
-	* Todos los recursos asociados a '/blueprint' están en un mismo Bean.
-	* Los métodos que atienden las peticiones a recursos REST retornan un código HTTP 202 si se procesaron adecuadamente, y el respectivo código de error HTTP si el recurso solicitado NO existe, o si se generó una excepción en el proceso (dicha excepción NO DEBE SER de tipo 'Exception', sino una concreta)	
-2. Funcionalidad.
-	* El API REST ofrece los recursos, y soporta sus respectivos verbos, de acuerdo con lo indicado en el enunciado.
-3. Análisis de concurrencia.
-	* En el código, y en las respuestas del archivo de texto, se tuvo en cuenta:
-		* La colección usada en InMemoryBlueprintPersistence no es Thread-safe (se debió cambiar a una con esta condición).
-		* El método que agrega un nuevo plano está sujeta a una condición de carrera, pues la consulta y posterior agregación (condicionada a la anterior) no se realizan de forma atómica. Si como solución usa un bloque sincronizado, se evalúa como R. Si como solución se usaron los métodos de agregación condicional atómicos (por ejemplo putIfAbsent()) de la colección 'Thread-Safe' usada, se evalúa como B.
