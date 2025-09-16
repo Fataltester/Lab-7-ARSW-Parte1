@@ -66,6 +66,9 @@ public class BlueprintAPIController {
     public ResponseEntity<?> getBlueprintsByAuthor(@PathVariable("author") String author){
         try {
             Set<Blueprint> blueprints = bps.getBlueprintsByAuthor(author);
+            if (blueprints == null || blueprints.isEmpty()) {
+            return new ResponseEntity<>("No blueprints found for author: " + author, HttpStatus.NOT_FOUND);
+            }
             return new ResponseEntity<>(blueprints,HttpStatus.ACCEPTED);
         } catch (Exception e) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e);
@@ -81,7 +84,7 @@ public class BlueprintAPIController {
             return new ResponseEntity<>(bp,HttpStatus.ACCEPTED);
         } catch (Exception e) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e);
-            return new ResponseEntity<>("Can not get the Blueprints for that author",HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Can not get the Blueprints for that author and name",HttpStatus.NOT_FOUND);
         }
     }
     
