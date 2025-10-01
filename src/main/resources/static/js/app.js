@@ -1,3 +1,6 @@
+// variable para realizar el cambio de cliente (apiclient, apimock)
+var client = apimock;
+
 var app = (function () {
     var author = null;
     var blueprints = [];
@@ -12,7 +15,7 @@ var app = (function () {
         getBlueprints: function (authorName) {
             author = authorName;
 
-            apimock.getBlueprintsByAuthor(author, function (bps) {
+            client.getBlueprintsByAuthor(author, function (bps) {
                 if (!bps) {
                     alert("No se encontraron planos para " + author);
                     $("#blueprintstable").find("tr:gt(0)").remove();
@@ -57,7 +60,7 @@ var app = (function () {
         },
 
         drawBlueprint: function (authorName, blueprintName) {
-            apimock.getBlueprintsByNameAndAuthor(authorName, blueprintName, function (bp) {
+            client.getBlueprintsByNameAndAuthor(authorName, blueprintName, function (bp) {
                 if (!bp) {
                     alert("No se encontró el plano: " + blueprintName);
                     return;
@@ -79,7 +82,7 @@ var app = (function () {
                 ctx.stroke();
 
                 // Actualizar nombre del plano
-                $("#currentBlueprint").text("Plano actual: " + bp.name);
+                $("#currentBlueprint").text("Current blueprint: " + bp.name);
             });
         }
     };

@@ -1,52 +1,70 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Lab 6 Blueprints</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
-        <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <link rel="stylesheet"
-          href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <script src="js/apimock.js"></script>
-        <script src="js/app.js"></script>
-    </head>
 
-    <style>
-        table, th, td {
-          border:1px solid black;
-        }
-    </style>
+<head>
+  <title>Lab 6 Blueprints</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+  <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script src="js/apiclient.js"></script>
+  <script src="js/apimock.js"></script>
+  <script src="js/app.js"></script>
 
-    <body>
-        <h1>Blueprints</h1>
 
-        <form>
-            <label >Autor:</label><br>
-            <input type="text" id="fname" name="fname" value=""><br>
-            <input type="button" value="Get Blueprints" id="getBlueprintsBtn">
-        </form>
+</head>
+</head>
 
-        <h2 id="showfname">nombre del autor</h2>
-        <table style="width:50%", id="blueprintstable">
-            <tr>
-              <th>Blueprint name</th>
-              <th>Number of points</th>
-              <th>OPEN</th>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </table>
+<style>
+  table,
+  th,
+  td {
+    border: 1px solid black;
+  }
+</style>
 
-        <h2 id="totalpoints">Total user points:</h2>
+<body>
+  <h1 id="title">Blueprints</h1>
+  <div class="container">
+    <!-- Bloque izquierdo -->
+    <div class="content-align">
+      
+      
+      <form>
+        <label>Author:</label>
+        <input type="text" id="fname" name="fname" value="">
+        <input type="button" value="Get blueprints" id="getBlueprintsBtn">
+      </form>
+  
+      <h2 id="showfname">autor's blueprints</h2>
+      <table id="blueprintstable">
+        <tr>
+          <th>Blueprint name</th>
+          <th>Number of points</th>
+          <th>OPEN</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+  
+      <h2 id="totalpoints">Total user points:</h2>
+    </div>
+  
+    <!-- Bloque derecho -->
+    <div class="right-align">
+      <h3 id="currentBlueprint">Current blueprint: none</h3>
+      <canvas id="blueprintCanvas" width="500" height="400" style="border:1px solid black;">
+        Tu navegador no soporta Canvas.
+      </canvas>
+    </div>
+  </div>
+  
 
-        <h3 id="currentBlueprint">Plano actual: ninguno</h3>
-        <canvas id="blueprintCanvas" width="500" height="400" style="border:1px solid black;">
-            Tu navegador no soporta Canvas.
-        </canvas>
+</body>
 
-    </body>
 </html>
