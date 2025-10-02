@@ -20,7 +20,7 @@ var apiclient = {
     // Obtener un plano específico por autor y nombre de plano
     getBlueprintsByNameAndAuthor: function (authorName, blueprintName, callback) {
         $.ajax({
-            url: `http://localhost:8080/${authorName}/${blueprintName}`,
+            url: `http://localhost:8080/blueprints/${authorName}/${blueprintName}`,
             method: 'GET',
             success: function (data) {
                 if (data) {
