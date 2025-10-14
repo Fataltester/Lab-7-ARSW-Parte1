@@ -33,7 +33,25 @@ var apiclient = {
                 callback("Error al obtener el plano: " + error, null);  // Error de peticion
             }
         });
+    },
+    //actualizar el plano del api 
+    updateBlueprint: function (authorName, blueprintName, blueprintObj, callback) {
+        $.ajax({
+            url: `http://localhost:8080/blueprints/${authorName}/${blueprintName}`,
+            type: 'PUT',
+            data: JSON.stringify(blueprintObj),
+            contentType: "application/json",
+            success: function (response) {
+                console.log("Plano actualizado correctamente:", response);
+                callback(null, response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error al actualizar el plano:", error);
+                callback("Error al actualizar el plano: " + error, null);
+            }
+        });
     }
+    
 };
 
 

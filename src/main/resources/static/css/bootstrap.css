@@ -46,26 +46,22 @@ form input[type="text"] {
 
 /*Bloque de la derecha (canvas)*/
 .right-align {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    display: inline-block;
     background: #ffffff;
-    padding: 20px;
+    padding: 0;              /* 🔸 quita el padding interno */
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     margin-left: 40px;
-    margin-top: 20px;  
-    width: 40%;
+    margin-top: 20px;
 }
 
 /*Canvas adaptado*/
 #blueprintCanvas {
-    margin-top: 15px;
-    width: 100%;       
-    height: 400px;    
+    display: block;
     border: 1px solid #000;
-    box-sizing: border-box;
+    border-radius: 10px;
 }
+
 
 /*Títulos alineados*/
 .content-align h2,
@@ -105,5 +101,6 @@ form input[type="text"] {
 
 /*Título principal*/
 #title {
-    margin-left: 30px; /
+    margin-left: 30px; 
 }
+
