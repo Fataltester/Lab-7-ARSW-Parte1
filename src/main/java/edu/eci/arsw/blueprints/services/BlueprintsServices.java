@@ -64,4 +64,8 @@ public class BlueprintsServices {
             String bpname, Blueprint bpnew) throws BlueprintNotFoundException{
         return filter.filterByMethod(bpp.updateBlueprintByAuthorAndName(author, bpname, bpnew));
     }
+
+    public Set<Blueprint> deleteBlueprintsByAuthorAndName(String author, String name) throws BlueprintNotFoundException {
+        return filter.filterByPrints(bpp.deleteBlueprintByAuthorAndName(author, name));
+    }
 }

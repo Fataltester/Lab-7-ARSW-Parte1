@@ -1,72 +1,63 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Lab 6 Blueprints</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
-  <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <script src="js/apiclient.js"></script>
-  <script src="js/apimock.js"></script>
-  <script src="js/app.js"></script>
-
-
-</head>
+    <title>Lab 6 Blueprints</title>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <script src="js/apiclient.js"></script>
+    <script src="js/apimock.js"></script>
+    <script src="js/app.js"></script>
 </head>
 
 <style>
-  table,
-  th,
-  td {
-    border: 1px solid black;
-  }
+    table,
+    th,
+    td {
+        border: 1px solid black;
+    }
 </style>
 
 <body>
-  <h1 id="title">Blueprints</h1>
-  <div class="container">
+<h1 id="title">Blueprints</h1>
+<div class="container">
     <!-- Bloque izquierdo -->
     <div class="content-align">
-      
-      
-      <form>
-        <label>Author:</label>
-        <input type="text" id="fname" name="fname" value="">
-        <input type="button" value="Get blueprints" id="getBlueprintsBtn">
-        <button type="button" id="btnSave">Save / Update</button>
+        <form>
+            <label>Author:</label>
+            <input id="fname" name="fname" type="text" value="">
+            <input id="getBlueprintsBtn" type="button" value="Get blueprints">
+            <button id="btnSave" type="button">Save / Update</button>
+            <button id="btnNew" type="button">New</button>
+            <button id="btnDelete" type="button">Delete</button>
+        </form>
 
-      </form>
-  
-      <h2 id="showfname">autor's blueprints</h2>
-      <table id="blueprintstable">
-        <tr>
-          <th>Blueprint name</th>
-          <th>Number of points</th>
-          <th>OPEN</th>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </table>
-  
-      <h2 id="totalpoints">Total user points:</h2>
+        <h2 id="showfname">autor's blueprints</h2>
+        <table id="blueprintstable">
+            <tr>
+                <th>Blueprint name</th>
+                <th>Number of points</th>
+                <th>OPEN</th>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+        <h2 id="totalpoints">Total user points:</h2>
     </div>
-  
+
     <!-- Bloque derecho -->
     <div class="right-align">
-      <h3 id="currentBlueprint">Current blueprint: none</h3>
-      <canvas id="blueprintCanvas" width="500" height="400" style="border:1px solid black;">
-        Tu navegador no soporta Canvas.
-      </canvas>
+        <h3 id="currentBlueprint">Current blueprint: none</h3>
+        <canvas height="400" id="blueprintCanvas" style="border:1px solid black;" width="500">
+            Tu navegador no soporta Canvas.
+        </canvas>
     </div>
-  </div>
-  
-
+</div>
 </body>
-
 </html>

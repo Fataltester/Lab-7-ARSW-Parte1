@@ -1,8 +1,7 @@
-
 var apiclient = {
     getBlueprintsByAuthor: function (authorName, callback) {
         $.ajax({
-            url: `http://localhost:8080/blueprints/${authorName}`, 
+            url: `http://localhost:8080/blueprints/${authorName}`,
             method: 'GET',
             success: function (data) {
                 console.log(data)
@@ -50,8 +49,39 @@ var apiclient = {
                 callback("Error al actualizar el plano: " + error, null);
             }
         });
+    },
+
+    createBlueprint: function (blueprintObj, callback) {
+        $.ajax({
+            url: "http://localhost:8080/blueprints/",
+            type: "POST",
+            data: JSON.stringify(blueprintObj),
+            contentType: "application/json",
+            success: function (response) {
+                console.log("Blueprint creado correctamente:", response);
+                callback(null, response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error al crear blueprint:", error);
+                callback("Error al crear blueprint: " + error, null);
+            }
+        });
+    },
+
+    deleteBlueprint: function (authorName, blueprintName, callback) {
+        $.ajax({
+            url: `http://localhost:8080/blueprints/${authorName}/${blueprintName}`,
+            type: "DELETE",
+            success: function (response) {
+                console.log("Blueprint eliminado:", response);
+                callback(null, response);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error al eliminar blueprint:", error);
+                callback("Error al eliminar blueprint: " + error, null);
+            }
+        });
     }
-    
 };
 
 

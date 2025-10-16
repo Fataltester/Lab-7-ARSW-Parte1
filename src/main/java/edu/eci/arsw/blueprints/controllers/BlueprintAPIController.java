@@ -103,5 +103,19 @@ public class BlueprintAPIController {
             return new ResponseEntity<>("Unknown error",HttpStatus.FORBIDDEN);  
         }
     }
-}
 
+    @RequestMapping(value = "/{author}/{name}",method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteBlueprint(@PathVariable("author") String author,
+                                             @PathVariable("name") String name){
+        try {
+            Set<Blueprint> blueprints = bps.deleteBlueprintsByAuthorAndName(author, name);
+            return new ResponseEntity<>(blueprints,HttpStatus.ACCEPTED);
+        } catch (BlueprintNotFoundException e1) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e1);
+            return new ResponseEntity<>("Error, Can't delete blueprint",HttpStatus.FORBIDDEN);
+        } catch (Exception e2) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, e2);
+            return new ResponseEntity<>("Unknown error",HttpStatus.FORBIDDEN);
+        }
+    }
+}

@@ -89,4 +89,23 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence{
         }
         return bpnew;
     }
+
+    @Override
+    public Set<Blueprint> deleteBlueprintByAuthorAndName(String author, String name) throws BlueprintNotFoundException {
+        Tuple<String, String> key = new Tuple<>(author, name);
+        // Intentar eliminar el blueprint
+        Blueprint removed = blueprints.remove(key);
+
+        if (removed == null) {
+            throw new BlueprintNotFoundException("Blueprint not found: " + author + " - " + name);
+        }
+        // Retornar todos los blueprints del mismo autor después de eliminar
+        Set<Blueprint> remainingBlueprints = new HashSet<>();
+        for (Map.Entry<Tuple<String, String>, Blueprint> entry : blueprints.entrySet()) {
+            if (entry.getKey().getElem1().equals(author)) {
+                remainingBlueprints.add(entry.getValue());
+            }
+        }
+        return remainingBlueprints;
+    }
 }
